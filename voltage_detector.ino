@@ -8,6 +8,7 @@ int e = 6;
 int f = 7;
 int g = 8;
 int h = 9;
+int com = 10;
 int sensorValue = 0;  // variable to store the value coming from the sensor
 
 void setup() {
@@ -20,12 +21,22 @@ void setup() {
   pinMode(f, OUTPUT);
   pinMode(g, OUTPUT);
   pinMode(h, OUTPUT);
+  pinMode(com, OUTPUT);
   /*Start a Serial connection for testing*/
-  Serial.begin(9600);
-  Serial.println("Beginning Serial Output");
+  //Serial.begin(9600);
+  //Serial.println("Beginning Serial Output");
+  /*Set common pin to low*/
+  digitalWrite(com,LOW);
 }
 
 void loop() {
-  Serial.println(sensorValue);
-  delay(1000);  
+  sensorValue = analogRead(sensorPin);
+  //Serial.println(sensorValue);
+  if(sensorValue ==1023){
+      digitalWrite(f,HIGH);
+  }
+  else{
+      digitalWrite(f,LOW);
+  }
+  //delay(1000);  
 }
