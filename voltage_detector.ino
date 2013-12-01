@@ -5,7 +5,7 @@
 
 #define DIVIDED 3 //The multiplier for the resistor divider so that you can read what you actually need.
 
-byte seven_seg_digits[10][7] = { { 1,1,1,1,1,1,0 },  // = 0
+byte seven_seg_digits[16][7] = { { 1,1,1,1,1,1,0 },  // = 0
                                  { 0,1,1,0,0,0,0 },  // = 1
                                  { 1,1,0,1,1,0,1 },  // = 2
                                  { 1,1,1,1,0,0,1 },  // = 3
@@ -14,7 +14,13 @@ byte seven_seg_digits[10][7] = { { 1,1,1,1,1,1,0 },  // = 0
                                  { 1,0,1,1,1,1,1 },  // = 6
                                  { 1,1,1,0,0,0,0 },  // = 7
                                  { 1,1,1,1,1,1,1 },  // = 8
-                                 { 1,1,1,0,0,1,1 }   // = 9
+                                 { 1,1,1,0,0,1,1 },  // = 9
+                                 { 1,1,1,0,1,1,1 },  // = A
+                                 { 0,0,1,1,1,1,1 },  // = b
+                                 { 1,0,0,1,1,1,0 },  // = C
+                                 { 0,1,1,1,1,0,1 },  // = d
+                                 { 1,0,0,1,1,1,1 },  // = E
+                                 { 1,0,0,0,1,1,1 }   // = F
                                  };
 int sensorPin = A0;    // select the input pin for Vin
 int sensorValue = 0;  // variable to store the value coming from the sensor
