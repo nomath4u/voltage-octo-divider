@@ -3,6 +3,8 @@
 
 //#include <SevenSegment.h>
 
+#define DIVIDED 3 //The multiplier for the resistor divider so that you can read what you actually need.
+
 byte seven_seg_digits[10][7] = { { 1,1,1,1,1,1,0 },  // = 0
                                  { 0,1,1,0,0,0,0 },  // = 1
                                  { 1,1,0,1,1,0,1 },  // = 2
@@ -44,7 +46,7 @@ void sevenSegWrite(byte digit) {
 }
 
 byte convert(int val){
-  out = (val)/fraction;
+  out = ((float)val/fraction)*DIVIDED;
   return out;
 }
   
