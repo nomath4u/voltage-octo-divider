@@ -3,7 +3,7 @@
 
 //#include <SevenSegment.h>
 
-#define DIVIDED 3 //The multiplier for the resistor divider so that you can read what you actually need.
+#define DIVIDED 2.05 //The multiplier for the resistor divider so that you can read what you actually need.
 
 byte seven_seg_digits[16][7] = { { 1,1,1,1,1,1,0 },  // = 0
                                  { 0,1,1,0,0,0,0 },  // = 1
@@ -22,7 +22,7 @@ byte seven_seg_digits[16][7] = { { 1,1,1,1,1,1,0 },  // = 0
                                  { 1,0,0,1,1,1,1 },  // = E
                                  { 1,0,0,0,1,1,1 }   // = F
                                  };
-int sensorPin = A0;    // select the input pin for Vin
+int sensorPin = A4;    // select the input pin for Vin
 int sensorValue = 0;  // variable to store the value coming from the sensor
 float fraction = 1023/5; //Max adc out is 1023 and 5V going in
 byte out;
@@ -37,7 +37,7 @@ void setup() {
   pinMode(8, OUTPUT);
   pinMode(9, OUTPUT);
   /*Start a Serial connection for testing*/
-  //Serial.begin(9600);
+  Serial.begin(9600);
   //Serial.println("Beginning Serial Output");
   /*Set dot pin to low*/
   digitalWrite(9,LOW);
@@ -51,16 +51,24 @@ void sevenSegWrite(byte digit) {
   }
 }
 
-byte convert(int val){
+byte bconvert(int val){
   out = ((float)val/fraction)*DIVIDED;
   return out;
 }
-  
 
+float fconvert(int val){
+  float fout = ((float)val/fraction)*DIVIDED;
+  return fout;
+}
+void writeSerial(float val){
+  delay(1000);  //We don't need that much data
+  Serial.println(val);
+}
 void loop() {
   sensorValue = analogRead(sensorPin);
-
-  sevenSegWrite(convert(sensorValue));
+  writeSerial(fconvert(sensorValue));
+  //writeSerial(sensorValue);
+  sevenSegWrite(bconvert(sensorValue));
   delay(10);
 
 }
